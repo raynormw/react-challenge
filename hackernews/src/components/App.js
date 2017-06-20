@@ -3,6 +3,7 @@ import $ from 'jquery';
 import _ from 'lodash';
 
 import './App.css';
+import NewsHeader from './NewsHeader';
 import NewsItem from './NewsItem';
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <NewsHeader />
         {items}
       </div>
     );
@@ -56,14 +58,17 @@ class App extends React.Component {
   }
 
   _getNews() {
+    let rank = 1;
     return this.state.items.map((item) => {
       return (<NewsItem
-        url={item.url}
-        title={item.title}
-        score={item.score}
+        rank={rank++}
         by={item.by}
-        kids={item.kids}
         id={item.id}
+        kids={item.kids}
+        score={item.score}
+        time={item.time}
+        title={item.title}
+        url={item.url}
         key={item.id}/>);
     });
   }

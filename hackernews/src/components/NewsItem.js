@@ -8,7 +8,12 @@ class NewsItem extends React.Component {
   render() {
     return (
       <div className="newsItem">
-        {this._getTitle()}
+        {this._getRank()}
+        {this._getVote()}
+        <div className="newsItem-itemText">
+          {this._getTitle()}
+          {this._getSubtext()}
+        </div>
       </div>
     );
   }
@@ -18,7 +23,6 @@ class NewsItem extends React.Component {
       <div className="newsItem-title">
         <a className="newsItem-titleLink" href={this.props.url}>{this.props.title}</a>
         {this._getDomain()}
-        {this._getSubtext()}
       </div>
     );
   }
@@ -42,15 +46,31 @@ class NewsItem extends React.Component {
   }
 
   _getCommentLink() {
-    var commentText = 'discuss';
+    let commentText = 'discuss';
     if (this.props.kids && this.props.kids.length) {
-      // This only counts top-level comments.
-      // To get the full count, recursively get item details for this news item.
       commentText = this.props.kids.length + ' comments';
     }
 
     return (
       <a href={'https://news.ycombinator.com/item?id=' + this.props.id}>{commentText}</a>
+    );
+  }
+
+  _getRank() {
+    return (
+      <div className="newsItem-rank">
+        {this.props.rank}.
+      </div>
+    );
+  }
+
+  _getVote() {
+    return (
+      <div className="newsItem-vote">
+        <a href={'https://news.ycombinator.com/vote?for=' + this.props.id + '&dir=up&whence=news'}>
+          <img src="/grayarrow2x.gif" alt="arrow" width="10"/>
+        </a>
+      </div>
     );
   }
 

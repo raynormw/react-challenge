@@ -31,19 +31,22 @@ class App extends React.Component {
   _fetchNews() {
     let self = this;
     $.ajax({
+      // Ambil topstories
       url: 'https://hacker-news.firebaseio.com/v0/topstories.json',
       dataType: 'json'
     }).then(function (stories) {
-      // Get the item details in parallel
-      var detailDeferreds = _(stories.slice(0, 30)).map(function (itemId) {
+      // Dapet id topstories
+      // Ambil 30 stories teratas
+      var details = _(stories.slice(0, 30)).map(function (itemId) {
         return $.ajax({
           url: 'https://hacker-news.firebaseio.com/v0/item/' + itemId + '.json',
           dataType: 'json'
         });
       }).value();
-      return $.when.apply($, detailDeferreds);
+      console.log(details);
+      return $.when.apply($, details);
     }).then(function () {
-      // Extract the response JSON
+      // Simpen hasil ke state
       var items = _(arguments).map(function (argument) {
         return argument[0];
       }).value();
@@ -55,7 +58,13 @@ class App extends React.Component {
   _getNews() {
     return this.state.items.map((item) => {
       return (<NewsItem
-        url={item.url} title={item.title} />);
+        url={item.url}
+        title={item.title}
+        score={item.score}
+        by={item.by}
+        kids={item.kids}
+        id={item.id}
+        key={item.id}/>);
     });
   }
 }

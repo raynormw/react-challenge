@@ -3,8 +3,10 @@
   background: #ff6600;
   color: black;
   display: flex;
-  font-size: 10pt;
+  font-size: 12pt;
   padding: 2px;
+  letter-spacing: 1pt;
+  line-height: 1.4em;
 }
 
 .newsHeader-logo {

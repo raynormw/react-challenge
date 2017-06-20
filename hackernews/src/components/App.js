@@ -30,6 +30,10 @@ class App extends React.Component {
     this._fetchNews();
   }
 
+  componentDidMount() {
+    setInterval(() => this._fetchNews(), 5000);
+  }
+
   _fetchNews() {
     let self = this;
     $.ajax({

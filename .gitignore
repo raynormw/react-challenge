@@ -1,0 +1,6 @@
+.DS_Store
+hackernews/node_modules
+hackernews/dist
+hackernews/npm-debug.log*
+hackernews/yarn-debug.log*
+hackernews/yarn-error.log*

@@ -1,6 +1,7 @@
 import React from 'react';
 import URL from 'url';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import './Newsitem.css';
 
@@ -40,7 +41,7 @@ class NewsItem extends React.Component {
   _getSubtext() {
     return (
       <div className="newsItem-subtext">
-        {this.props.score} points by <a href={'https://news.ycombinator.com/user?id=' + this.props.by}>{this.props.by}</a> {moment.utc(this.props.time * 1000).fromNow()} | {this._getCommentLink()}
+        {this.props.score} points by <Link to={'/user/' + this.props.by}>{this.props.by}</Link> {moment.utc(this.props.time * 1000).fromNow()} | {this._getCommentLink()}
       </div>
     );
   }

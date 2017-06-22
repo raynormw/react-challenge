@@ -2,11 +2,10 @@ import React from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
 
-import './App.css';
-import NewsHeader from './NewsHeader';
+import './NewsPage.css';
 import NewsItem from './NewsItem';
 
-class App extends React.Component {
+class NewsPage extends React.Component {
   constructor() {
     super();
 
@@ -19,8 +18,7 @@ class App extends React.Component {
     const items = this._getNews();
 
     return (
-      <div className="App">
-        <NewsHeader />
+      <div className="NewsPage">
         {items}
       </div>
     );
@@ -31,7 +29,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => this._fetchNews(), 5000);
+    this._timer = setInterval(() => this._fetchNews(), 5000);
+  }
+
+  comoponentWillUnmount() {
+    clearInterval(this._timer);
   }
 
   _fetchNews() {
@@ -49,14 +51,14 @@ class App extends React.Component {
           dataType: 'json'
         });
       }).value();
-      console.log(details);
+      // console.log(details);
       return $.when.apply($, details);
     }).then(function () {
       // Simpen hasil ke state
       var items = _(arguments).map(function (argument) {
         return argument[0];
       }).value();
-      console.log(items);
+      // console.log(items);
       self.setState({ items });
     });
   }
@@ -78,4 +80,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default NewsPage;

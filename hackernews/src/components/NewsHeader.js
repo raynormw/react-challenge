@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './NewsHeader.css';
 
@@ -15,7 +16,7 @@ class NewsHeader extends React.Component {
   _getLogo() {
     return (
       <div className="newsHeader-logo">
-        <a href="https://www.ycombinator.com"><img src="y18.gif" alt="logo"/></a>
+        <Link to={"/"}><img src="y18.gif" alt="logo"/></Link>
       </div>
     );
   }
@@ -23,7 +24,7 @@ class NewsHeader extends React.Component {
   _getTitle() {
     return (
       <div className="newsHeader-title">
-        <a className="newsHeader-textLink" href="https://news.ycombinator.com">Hacker News</a>
+        <Link to={"/"} className="newsHeader-textLink">Hacker News</Link>
       </div>
     );
   }

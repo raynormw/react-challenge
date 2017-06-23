@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './NewsHeader.css';
+import logo from '../y18.gif';
 
 class NewsHeader extends React.Component {
   render() {
@@ -16,7 +17,7 @@ class NewsHeader extends React.Component {
   _getLogo() {
     return (
       <div className="newsHeader-logo">
-        <Link to={"/"}><img src="y18.gif" alt="logo"/></Link>
+        <Link to={"/"}><img src={logo} alt="logo"/></Link>
       </div>
     );
   }

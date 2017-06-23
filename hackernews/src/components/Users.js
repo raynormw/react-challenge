@@ -1,6 +1,5 @@
 import React from 'react';
 import $ from 'jquery';
-import moment from 'moment';
 
 import './Users.css';
 
@@ -24,22 +23,24 @@ class Users extends React.Component {
       url: 'https://hacker-news.firebaseio.com/v0/user/' + id + '.json',
       dataType: 'json'
     }).then(function (user) {
-      self.setState({user});
+      self.setState({ user });
     });
   }
 
   render() {
-    let about = "Nothing to show";
-    if (this.state.user.about) {
-      about = this.state.user.about
-    }
     if (this.state.user) {
+      let about = "Nothing to show";
+      if (this.state.user.about) {
+        about = this.state.user.about;
+        console.log(about);
+      }
+
       return (
         <div className="users">
           <p>User: {this.state.user.id}</p>
           <p>Created: {this.state.user.created}</p>
           <p>Karma: {this.state.user.karma}</p>
-          <td>About: {about}</td>
+          <p>About: {about}</p>
         </div>
       );
     }

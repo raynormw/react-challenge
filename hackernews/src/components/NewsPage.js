@@ -32,13 +32,16 @@ class NewsPage extends React.Component {
     this._timer = setInterval(() => this._fetchNews(), 5000);
   }
 
-  comoponentWillUnmount() {
+  componentWillUnmount() {
     clearInterval(this._timer);
+    if (this.serverRequest && this.serverRequest.abort) {
+      this.serverRequest.abort();
+    }
   }
 
   _fetchNews() {
     let self = this;
-    $.ajax({
+    this.serverRequest = $.ajax({
       // Ambil topstories
       url: 'https://hacker-news.firebaseio.com/v0/topstories.json',
       dataType: 'json'
